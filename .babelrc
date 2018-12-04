@@ -1,0 +1,15 @@
+{
+  "presets": [
+    "env"
+  ],
+  "plugins": [
+    "transform-class-properties"
+  ],
+  "env": {
+    "server-dev": {
+      "plugins": [
+        [ "babel-plugin-webpack-alias", { "config": "./webpack/${NODE_ENV}.config.js" } ]
+      ]
+    }
+  }
+}

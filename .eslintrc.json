@@ -1,0 +1,39 @@
+{
+  "env": {
+      "node": true,
+      "mocha": true
+  },
+  "parser": "babel-eslint",
+  "extends": "eslint:recommended",
+  "parserOptions": {
+      "ecmaFeatures": {
+          "js": true
+      },
+      "ecmaVersion": 2018,
+      "sourceType": "module"
+  },
+  "plugins": [
+      "import"
+  ],
+  "rules": {
+      "linebreak-style": [
+          "error",
+          "unix"
+      ],
+      "quotes": [
+          "error",
+          "single"
+      ],
+      "semi": [
+          "error",
+          "always"
+      ],
+      "no-mixed-spaces-and-tabs": 0,
+      "import/no-unresolved": "off"
+  },
+  "globals": {
+      "expect": true,
+      "describe": true,
+      "it": true
+  }
+}
