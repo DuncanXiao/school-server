@@ -7,11 +7,17 @@ module.exports = function(sequelize, DataTypes) {
 		},
 		account: {
 			type: DataTypes.STRING,
-			allowNull: false
+			allowNull: false,
+			unique: true
 		},
 		password: {
 			type: DataTypes.STRING,
 			allowNull: false
+		},
+		phone: {
+			type: DataTypes.STRING,
+			allowNull: false,
+			unique: true
 		},
 		createdAt: {
 			type: DataTypes.DATE,

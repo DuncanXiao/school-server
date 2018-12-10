@@ -21,6 +21,18 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
+		receiveName1: {
+			type: DataTypes.STRING,
+			allowNull: false
+		},
+		receiveName2: {
+			type: DataTypes.STRING,
+			allowNull: true
+		},
+		receiveName3: {
+			type: DataTypes.STRING,
+			allowNull: true
+		},
 		address1: {
 			type: DataTypes.STRING,
 			allowNull: false
@@ -38,6 +50,22 @@ module.exports = function(sequelize, DataTypes) {
 			allowNull: false
 		},
 		phone2: {
+			type: DataTypes.STRING,
+			allowNull: true
+		},
+		phone3: {
+			type: DataTypes.STRING,
+			allowNull: true
+		},
+		cornetPhone1: {
+			type: DataTypes.STRING,
+			allowNull: true
+		},
+		cornetPhone2: {
+			type: DataTypes.STRING,
+			allowNull: true
+		},
+		cornetPhone3: {
 			type: DataTypes.STRING,
 			allowNull: true
 		},
