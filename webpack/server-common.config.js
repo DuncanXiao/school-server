@@ -14,7 +14,6 @@ const baseSetting = {
       Routers: serverDirectory + '/routers', 
       Static: serverDirectory + '/static',
       Views: serverDirectory + '/views',
-      Constant: serverDirectory + '/constant',
       Sql: serverDirectory + '/sql',
       Utilities: serverDirectory + '/utilities',
       Model: serverDirectory + '/model'
