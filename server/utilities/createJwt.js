@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { SECREAT } from 'Constant/config';
+const SECREAT = 'school';
 
 export const signToken = (playload) => {
 	return jwt.sign(playload, SECREAT);

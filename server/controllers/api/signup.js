@@ -1,18 +1,39 @@
 import BaseController from '../baseController';
-import EmailModel from 'Model/emailModel';
+import { Customer, Registry } from '../../model/index';
 import * as _ from 'lodash';
 
+// account: Joi.string().required(),
+// password: Joi.string().min(6).max(8).required(),
+// phone: Joi.number().required(),
+// schoolId: Joi.number().required(),
+// name: Joi.string().required(),
+// sex: Joi.string(),
+// address: Joi.string()
 class SignupController extends BaseController {
 
-	insertEmail = async(ctx) => {
+	insertCustomer = async(ctx) => {
+		const customer = new Customer();
+		const registry = new Registry();
+		const {account, password, phone1, schoolId, name, sex, address1} = ctx.request.body;
 		try {
-			const emailModel = new EmailModel();
-			const data = await emailModel.insertToSql(ctx.request.body);
-			if (_.isEmpty(data)) {
-				throw new Error('Email | password is invalidate');
-			}
-			this.setToken();
-			return data;
+			const result = await customer.transaction({
+				callback: async(t) => {
+					const registryResult = await registry.insertToSql({
+						account: account,
+						password: password
+					}, {transaction: t});
+					const customerResult = await customer.insertToSql({
+						schoolId: schoolId,
+						registryId: registryResult.id,
+						name: name,
+						sex: sex,
+						address1: address1,
+						phone1: phone1
+					}, {transaction: t});
+					return customerResult;
+				}
+			});
+			return result;
 		} catch (error) {
 			throw error;
 		}
