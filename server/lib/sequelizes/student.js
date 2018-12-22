@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-	const Customer = sequelize.define('customer', {
+	const Student = sequelize.define('student', {
 		id: {
 			type: DataTypes.INTEGER,
 			primaryKey: true,
@@ -87,10 +87,10 @@ module.exports = function(sequelize, DataTypes) {
 		freezeTableName: true
   });
   
-  Customer.associate = models => {
-    Customer.belongsTo(models.school, { foreignKey: 'schoolId' });
-    Customer.belongsTo(models.registry, { foreignKey: 'registryId' });
+  Student.associate = models => {
+    Student.belongsTo(models.school, { foreignKey: 'schoolId' });
+    Student.belongsTo(models.registry, { foreignKey: 'registryId' });
   };
 
-  return Customer;
+  return Student;
 };

@@ -30,9 +30,9 @@ const inintModel = () => {
 };
 
 inintModel();
-// models.school.sync({force: true});
+// models.school.sync();
 // models.registry.sync({force: true});
-// models.customer.sync({force: true});
+// models.student.sync({force: true});
 
 class BaseModel {
 

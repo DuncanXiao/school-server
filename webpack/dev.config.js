@@ -1,5 +1,5 @@
 const _externals = require('externals-dependencies');
-const common = require('./server-common.config');
+const common = require('./common.config');
 
 const setting = {
   target: 'node',
