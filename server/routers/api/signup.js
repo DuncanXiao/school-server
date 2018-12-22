@@ -8,7 +8,7 @@ const signupApi = new Router();
 signupApi.post('/signup', validate(signupSchema), async(ctx) => {
 	const singupController = new SingupController();
 	try {
-		const data = await singupController.insertCustomer(ctx);
+		const data = await singupController.insertStudent(ctx);
 		ctx.status = 200;
 		ctx.body = data;
 	} catch(error) {

@@ -1,9 +1,9 @@
-import Customer from './customer';
+import Student from './student';
 import Registry from './registry';
 import School from './school';
 
 export {
-  Customer,
+  Student,
   Registry,
   School
 };
