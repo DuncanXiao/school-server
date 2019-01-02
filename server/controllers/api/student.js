@@ -1,6 +1,5 @@
 import BaseController from '../baseController';
 import { Student } from '../../model/index';
-import * as _ from 'lodash';
 
 class StudentController extends BaseController {
   constructor(){

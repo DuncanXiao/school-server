@@ -26,6 +26,41 @@ class BaseController {
     ctx.status = boom.output.statusCode;
     ctx.body = boom.output.payload;
   }
+
+  insertItem = async(ctx) => {
+    try {
+      const requestBody = ctx.request.body;
+			const result = await this.model.insertToSql(requestBody);
+			return result;
+    } catch(error) {
+			throw error;
+    }
+  }
+
+  getItemById = async(ctx) => {
+    try {
+      const { id } = ctx.params;
+      const data = await this.model.findOneToSql({ where: {id} });
+			return data;
+    } catch(error) {
+			throw error;
+    }
+  }
+
+  putItemById = async(ctx) => {
+    try {
+      const { id } = ctx.params;
+      await this.model.updateToSql(ctx.request.body, {
+        where: {id}
+      });
+      const data = await this.model.findOneToSql({
+        where: {id}
+      });
+			return data;
+    } catch(error) {
+			throw error;
+    }
+  }
 }
 
 export default BaseController;
