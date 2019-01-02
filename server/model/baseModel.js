@@ -33,6 +33,8 @@ inintModel();
 // models.school.sync();
 // models.registry.sync({force: true});
 // models.student.sync({force: true});
+// models.schoolStore.sync({force: true});
+// models.student.sync({force: true});
 
 class BaseModel {
 
@@ -79,6 +81,15 @@ class BaseModel {
 	async findOneToSql(options) {
 		try {
 			const instance = await this.model.findOne(options);
+			return instance;
+		} catch (error) {
+			throw this.getErrorMessage(error);
+		}
+	}
+
+	async findAllToSql(options) {
+		try {
+			const instance = await this.model.findAll(options);
 			return instance;
 		} catch (error) {
 			throw this.getErrorMessage(error);
