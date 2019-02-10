@@ -34,7 +34,7 @@ inintModel();
 // models.registry.sync({force: true});
 // models.student.sync({force: true});
 // models.schoolStore.sync({force: true});
-// models.student.sync({force: true});
+// models.schoolStoreProduct.sync({force: true});
 
 class BaseModel {
 
@@ -90,6 +90,15 @@ class BaseModel {
 	async findAllToSql(options) {
 		try {
 			const instance = await this.model.findAll(options);
+			return instance;
+		} catch (error) {
+			throw this.getErrorMessage(error);
+		}
+	}
+
+	async bulkInsertToSql(options) {
+		try {
+			const instance = await this.model.bulkCreate(options);
 			return instance;
 		} catch (error) {
 			throw this.getErrorMessage(error);

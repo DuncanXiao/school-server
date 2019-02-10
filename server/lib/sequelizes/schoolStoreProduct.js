@@ -19,7 +19,7 @@ module.exports = function(sequelize, DataTypes) {
 		},
 		price: {
 			type: DataTypes.INTEGER,
-			allowNull: true
+			allowNull: false
 		},
 		type: {
 			type: DataTypes.STRING,
