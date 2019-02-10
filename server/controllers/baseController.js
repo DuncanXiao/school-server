@@ -37,10 +37,9 @@ class BaseController {
     }
   }
 
-  getItemById = async(ctx) => {
+  getItem = async(options) => {
     try {
-      const { id } = ctx.params;
-      const data = await this.model.findOneToSql({ where: {id} });
+      const data = await this.model.findOneToSql({ where: options });
 			return data;
     } catch(error) {
 			throw error;
@@ -57,6 +56,25 @@ class BaseController {
         where: {id}
       });
 			return data;
+    } catch(error) {
+			throw error;
+    }
+  }
+
+  getList = async(options) => {
+    try {
+      const data = await this.model.findOneToSql({ where: options });
+			return data;
+    } catch(error) {
+			throw error;
+    }
+  }
+  
+  insertList = async(ctx) => {
+    try {
+      const requestBody = ctx.request.body;
+			const result = await this.model.bulkInsertToSql(requestBody);
+      return result;
     } catch(error) {
 			throw error;
     }

@@ -61,6 +61,7 @@
     "lodash": "^4.17.11",
     "mysql2": "^1.5.3",
     "nodemailer": "^4.6.5",
+    "nodemon": "^1.18.9",
     "sequelize": "^4.38.0",
     "whatwg-fetch": "^2.0.4"
   }

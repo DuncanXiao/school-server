@@ -5,10 +5,10 @@ import SchoolStoreController from '../../controllers/api/schoolStore';
 
 const schoolStoreApi = new Router();
 
-schoolStoreApi.get('/school-stores/:schoolId/stores/:id', validate(schoolStoreSchema.schoolStoreItem.get), async(ctx) => {
+schoolStoreApi.get('/school-stores/:schoolId/stores/:id', validate(schoolStoreSchema.item.get), async(ctx) => {
   const controller = new SchoolStoreController();
   try {
-    const data = await controller.getItemById(ctx);
+    const data = await controller.getItem({id: ctx.params.id});
 		ctx.status = 200;
 		ctx.body = data;
 	} catch(error) {
@@ -16,7 +16,7 @@ schoolStoreApi.get('/school-stores/:schoolId/stores/:id', validate(schoolStoreSc
 	}
 });
 
-schoolStoreApi.put('/school-stores/:schoolId/stores/:id', validate(schoolStoreSchema.schoolStoreItem.put), async(ctx) => {
+schoolStoreApi.put('/school-stores/:schoolId/stores/:id', validate(schoolStoreSchema.item.put), async(ctx) => {
   const controller = new SchoolStoreController();
   try {
     const data = await controller.putItemById(ctx);
@@ -27,7 +27,7 @@ schoolStoreApi.put('/school-stores/:schoolId/stores/:id', validate(schoolStoreSc
 	}
 });
 
-schoolStoreApi.post('/school-stores/:schoolId/stores', validate(schoolStoreSchema.schoolStoreItem.post), async(ctx) => {
+schoolStoreApi.post('/school-stores/:schoolId/stores', validate(schoolStoreSchema.item.post), async(ctx) => {
   const controller = new SchoolStoreController();
   try {
     const data = await controller.insertItem(ctx);
@@ -39,10 +39,10 @@ schoolStoreApi.post('/school-stores/:schoolId/stores', validate(schoolStoreSchem
 });
 
 
-schoolStoreApi.get('/school-stores/:schoolId/stores', validate(schoolStoreSchema.schoolStoreList.get), async(ctx) => {
+schoolStoreApi.get('/school-stores/:schoolId/stores', validate(schoolStoreSchema.list.get), async(ctx) => {
   const controller = new SchoolStoreController();
   try {
-    const data = await controller.getList(ctx);
+    const data = await controller.getList({schoolId: ctx.params.schoolId});
 		ctx.status = 200;
 		ctx.body = data;
 	} catch(error) {

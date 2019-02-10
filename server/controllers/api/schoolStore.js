@@ -6,16 +6,6 @@ class SchoolStoreController extends BaseController {
     super();
     this.model = new SchoolStore();
   }
-
-  getList = async(ctx) => {
-    try {
-      const { schoolId } = ctx.params;
-      const data = await this.model.findAllToSql({ where: {schoolId} });
-			return data;
-    } catch(error) {
-			throw error;
-    }
-  }
 }
 
 export default SchoolStoreController;

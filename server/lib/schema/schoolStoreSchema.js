@@ -5,7 +5,7 @@ const schoolId = {schoolId: Joi.number().required()};
 const params = Object.assign({}, id, schoolId);
 
 const bodyRequest = {
-	type: Joi.string(),
+	type: Joi.number().required(),
 	name: Joi.string().required(),
 	address: Joi.string().required(),
 	description: Joi.string(),
@@ -15,12 +15,12 @@ const bodyRequest = {
 };
 
 const schoolStoreSchema = {
-	schoolStoreList: {
+	list: {
 		get: {
 			params: schoolId
 		}
 	},
-	schoolStoreItem: {
+	item: {
 		put: {
 			params: params,
 			body: Object.assign({}, bodyRequest, schoolId)
