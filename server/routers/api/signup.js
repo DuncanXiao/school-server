@@ -1,6 +1,6 @@
 import Router from 'koa-router';
 import validate from 'koa2-validation';
-import signupSchema from '../../lib/schema/signupSchema';
+import signupSchema from '../../lib/schema/signup';
 import SingupController from '../../controllers/api/signup';
 
 const signupApi = new Router();

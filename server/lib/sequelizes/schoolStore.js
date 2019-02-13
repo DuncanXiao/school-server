@@ -9,6 +9,10 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.INTEGER,
 			allowNull: false
 		},
+		registryId: {
+			type: DataTypes.INTEGER,
+			allowNull: false
+		},
 		type: {
 			type: DataTypes.INTEGER,
 			allowNull: false
@@ -53,6 +57,7 @@ module.exports = function(sequelize, DataTypes) {
 
   SchoolStore.associate = models => {
     SchoolStore.belongsTo(models.school, { foreignKey: 'schoolId' });
+    SchoolStore.belongsTo(models.schoolStoreRegistry, { foreignKey: 'registryId' });
   };
 
 	return SchoolStore;

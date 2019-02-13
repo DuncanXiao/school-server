@@ -1,6 +1,6 @@
 import Router from 'koa-router';
 import validate from 'koa2-validation';
-import loginSchema from '../../lib/schema/loginSchema';
+import loginSchema from '../../lib/schema/login';
 import LoginController from '../../controllers/api/login';
 
 const loginApi = new Router();

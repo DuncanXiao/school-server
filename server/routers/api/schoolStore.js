@@ -1,6 +1,6 @@
 import Router from 'koa-router';
 import validate from 'koa2-validation';
-import schoolStoreSchema from '../../lib/schema/schoolStoreSchema';
+import schoolStoreSchema from '../../lib/schema/schoolStore';
 import SchoolStoreController from '../../controllers/api/schoolStore';
 
 const schoolStoreApi = new Router();
