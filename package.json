@@ -63,6 +63,7 @@
     "nodemailer": "^4.6.5",
     "nodemon": "^1.18.9",
     "sequelize": "^4.38.0",
+    "uuid": "^3.3.2",
     "whatwg-fetch": "^2.0.4"
   }
 }
