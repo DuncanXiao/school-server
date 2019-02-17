@@ -4,6 +4,7 @@ import School from './school';
 import SchoolStore from './schoolStore';
 import SchoolStoreProduct from './schoolStoreProduct';
 import SchoolStoreRegistry from './schoolStoreRegistry';
+import StudentOrder from './studentOrder';
 
 export {
   Student,
@@ -11,5 +12,6 @@ export {
   School,
   SchoolStore,
   SchoolStoreProduct,
-  SchoolStoreRegistry
+  SchoolStoreRegistry,
+  StudentOrder
 };
