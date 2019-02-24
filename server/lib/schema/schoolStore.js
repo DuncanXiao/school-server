@@ -1,11 +1,12 @@
 import Joi from 'joi';
 
-const id = {id: Joi.number().required()};
+const uuid = {uuid: Joi.number().required()};
 const schoolId = {schoolId: Joi.number().required()};
-const params = Object.assign({}, id, schoolId);
+const params = Object.assign({}, uuid, schoolId);
 
 const bodyRequest = {
 	type: Joi.number().required(),
+	uuid: Joi.forbidden(),
 	name: Joi.string().required(),
 	address: Joi.string().required(),
 	description: Joi.string(),

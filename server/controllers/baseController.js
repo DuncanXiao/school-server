@@ -1,5 +1,5 @@
 import Boom from 'boom';
-import { signToken } from '../utilities/createJwt';
+import { signToken, verifyToken } from '../utilities/createJwt';
 import * as _ from 'lodash';
 require('dotenvjs').string();
 
@@ -15,7 +15,9 @@ class BaseController {
   }
 
   getToken = (ctx) => {
-    return ctx.cookies.get('token');
+    const token = ctx.header.get('token').split(' ')[1];
+    const payload = verifyToken(token);
+    return { token, ...payload };
   }
   
   handlerError = (ctx, error) => {
@@ -46,14 +48,14 @@ class BaseController {
     }
   }
 
-  putItemById = async(ctx) => {
+  putItemByUuId = async(ctx) => {
     try {
-      const { id } = ctx.params;
-      await this.model.updateToSql(ctx.request.body, {
-        where: {id}
+      const { uuid } = ctx.params;
+      await this.model.updateToSql(_.omit(ctx.request.body, ['uuid']), {
+        where: {uuid}
       });
       const data = await this.model.findOneToSql({
-        where: {id}
+        where: {uuid}
       });
 			return data;
     } catch(error) {
@@ -63,16 +65,15 @@ class BaseController {
 
   getList = async(options) => {
     try {
-      const data = await this.model.findOneToSql({ where: options });
+      const data = await this.model.findAllToSql({ where: options });
 			return data;
     } catch(error) {
 			throw error;
     }
   }
   
-  insertList = async(ctx) => {
+  insertList = async(requestBody) => {
     try {
-      const requestBody = ctx.request.body;
 			const result = await this.model.bulkInsertToSql(requestBody);
       return result;
     } catch(error) {

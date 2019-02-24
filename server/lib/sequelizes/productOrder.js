@@ -5,7 +5,7 @@ module.exports = function(sequelize, DataTypes) {
 			primaryKey: true,
 			autoIncrement: true
 		},
-		storeId: {
+		storeUuId: {
 			type: DataTypes.INTEGER,
 			allowNull: false
 		},
@@ -48,7 +48,6 @@ module.exports = function(sequelize, DataTypes) {
   });
   
   ProductOrder.associate = models => {
-    ProductOrder.belongsTo(models.schoolStore, { foreignKey: 'storeId' });
     ProductOrder.belongsTo(models.studentOrder, { foreignKey: 'studentOrderId' });
   };
 
