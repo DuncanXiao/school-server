@@ -5,10 +5,10 @@ import SchoolStoreProductController from '../../controllers/api/schoolStoreProdu
 
 const schoolStoreProductApi = new Router();
 
-schoolStoreProductApi.get('/school-stores/:storeId/products', validate(schoolStoreProductSchema.list.get), async(ctx) => {
+schoolStoreProductApi.get('/school-stores/:uuid/products', validate(schoolStoreProductSchema.list.get), async(ctx) => {
   const controller = new SchoolStoreProductController();
   try {
-    const data = await controller.getList({storeId: ctx.params.storeId});
+    const data = await controller.findProducts({storeId: ctx.params.storeId});
 		ctx.status = 200;
 		ctx.body = data;
 	} catch(error) {
@@ -16,10 +16,10 @@ schoolStoreProductApi.get('/school-stores/:storeId/products', validate(schoolSto
 	}
 });
 
-schoolStoreProductApi.post('/school-stores/:storeId/products', validate(schoolStoreProductSchema.list.post), async(ctx) => {
+schoolStoreProductApi.post('/school-stores/:uuid/products', validate(schoolStoreProductSchema.list.post), async(ctx) => {
   const controller = new SchoolStoreProductController();
   try {
-    const requestBody = controller.getStoreIdRequest(ctx.request.body, {storeId: ctx.params.storeId});
+    const requestBody = controller.getStoreIdRequest(ctx.request.body, ctx.params.uuid);
     const data = await controller.model.bulkInsertToSql(requestBody);
 		ctx.status = 200;
 		ctx.body = data;

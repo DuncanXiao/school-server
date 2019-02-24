@@ -6,6 +6,13 @@ class SchoolStoreController extends BaseController {
     super();
     this.model = new SchoolStore();
   }
+
+  getId = async(uuid) => {
+    return await this.findOneToSql({
+      where: { uuid },
+      attributes: ['id']
+    });
+  }
 }
 
 export default SchoolStoreController;

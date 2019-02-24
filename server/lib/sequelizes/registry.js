@@ -14,11 +14,6 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
-		phone: {
-			type: DataTypes.STRING,
-			allowNull: false,
-			unique: true
-		},
 		createdAt: {
 			type: DataTypes.DATE,
 			defaultValue: DataTypes.NOW

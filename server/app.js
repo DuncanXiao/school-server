@@ -5,6 +5,8 @@ import path from 'path';
 import serve from 'koa-static';
 import bodyParser from 'koa-bodyparser';
 import http from 'http';
+import jwt from 'koa-jwt';
+require('dotenvjs').string();
 
 process.on('unhandledRejection', (reason, p) => {
   // eslint-disable-next-line no-console
@@ -37,6 +39,8 @@ app.use(views(path.join(__dirname, './views'), {
 		ejs: 'ejs'
 	}
 }));
+
+app.use(jwt({ secret: process.env.SECREAT }).unless({ path: [/^\/api\/login/, /^\/api\/signup/] }));
 
 app.use(router.routes()).use(router.allowedMethods());
 const server = http.createServer(app.callback());

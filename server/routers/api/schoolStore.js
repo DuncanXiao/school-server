@@ -5,10 +5,10 @@ import SchoolStoreController from '../../controllers/api/schoolStore';
 
 const schoolStoreApi = new Router();
 
-schoolStoreApi.get('/school-stores/:schoolId/stores/:id', validate(schoolStoreSchema.item.get), async(ctx) => {
+schoolStoreApi.get('/school-stores/:schoolId/stores/:uuid', validate(schoolStoreSchema.item.get), async(ctx) => {
   const controller = new SchoolStoreController();
   try {
-    const data = await controller.getItem({id: ctx.params.id});
+    const data = await controller.getItem({uuid: ctx.params.uuid});
 		ctx.status = 200;
 		ctx.body = data;
 	} catch(error) {
@@ -16,10 +16,10 @@ schoolStoreApi.get('/school-stores/:schoolId/stores/:id', validate(schoolStoreSc
 	}
 });
 
-schoolStoreApi.put('/school-stores/:schoolId/stores/:id', validate(schoolStoreSchema.item.put), async(ctx) => {
+schoolStoreApi.put('/school-stores/:schoolId/stores/:uuid', validate(schoolStoreSchema.item.put), async(ctx) => {
   const controller = new SchoolStoreController();
   try {
-    const data = await controller.putItemById(ctx);
+    const data = await controller.putItemByUuId(ctx);
 		ctx.status = 200;
 		ctx.body = data;
 	} catch(error) {

@@ -1,8 +1,10 @@
 import jwt from 'jsonwebtoken';
-const SECREAT = 'school';
+require('dotenvjs').string();
+
+const SECREAT =process.env.SECREAT;
 
 export const signToken = (playload) => {
-	return jwt.sign(playload, SECREAT);
+	return jwt.sign(playload, SECREAT, { expiresIn: '2h' });
 };
 
 export const verifyToken = (token) => {

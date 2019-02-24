@@ -3,12 +3,13 @@ import Joi from 'joi';
 const studentSchema = {
   get: {
     params:{
-      id: Joi.number().required()
+      uuid: Joi.number().required()
     }
   },
   put: {
     body: {
       schoolId: Joi.number(),
+      uuid: Joi.forbidden(),
       name: Joi.string(),
       sex: Joi.string(),
       receiveName1: Joi.string(),

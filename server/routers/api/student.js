@@ -5,10 +5,10 @@ import StundentController from '../../controllers/api/student';
 
 const studentApi = new Router();
 
-studentApi.get('/student/:id', validate(studentSchema.get), async(ctx) => {
+studentApi.get('/student/:uuid', validate(studentSchema.get), async(ctx) => {
 	const stundentController = new StundentController();
 	try {
-		const data = await stundentController.getItemById(ctx);
+		const data = await stundentController.getItem({uuid: ctx.params.uuid});
 		ctx.status = 200;
 		ctx.body = data;
 	} catch(error) {
@@ -16,10 +16,10 @@ studentApi.get('/student/:id', validate(studentSchema.get), async(ctx) => {
 	}
 });
 
-studentApi.put('/student/:id', validate(studentSchema.put), async(ctx) => {
+studentApi.put('/student/:uuid', validate(studentSchema.put), async(ctx) => {
 	const stundentController = new StundentController();
 	try {
-		const data = await stundentController.putItemById(ctx);
+		const data = await stundentController.putItemByUuId(ctx);
 		ctx.status = 200;
 		ctx.body = data;
 	} catch(error) {
