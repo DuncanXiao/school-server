@@ -1,30 +1,28 @@
-import BaseController from '../baseController';
-import { Student, Registry } from '../../model/index';
+import BaseController from '../../baseController';
 
 class SignupController extends BaseController {
 
 	insertStudent = async(ctx) => {
-		const student = new Student();
-		const registry = new Registry();
+    const { student, registry } = ctx.apps.$models;
 		const {account, password, phone, schoolId, name, sex, address1} = ctx.request.body;
 		try {
-			const result = await student.transaction({
+			const result = await this.transaction({
 				callback: async(t) => {
-					const registryResult = await registry.insertToSql({
+					const registryResult = await registry.create({
 						account: account,
 						password: password,
 						phone: phone
 					}, {transaction: t});
-					const studentResult = await student.insertToSql({
+					const studentResult = await student.create({
 						schoolId: schoolId,
-						registryId: registryResult.id,
+						registryId: registryResult.dataValues.id,
 						name: name,
 						sex: sex,
 						address1: address1,
 						phone1: phone,
 						receiveName1: name
 					}, {transaction: t});
-					return studentResult;
+					return studentResult.dataValues;
 				}
 			});
 			return result;

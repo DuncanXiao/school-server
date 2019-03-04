@@ -1,18 +1,17 @@
 import Router from 'koa-router';
 import validate from 'koa2-validation';
 import schoolStoreRegistrySchema from '../../lib/schema/schoolStoreRegistry';
-import SchoolStoreRegistryController from '../../controllers/api/schoolStoreRegistry';
 
 const signupSchoolStoreApi = new Router();
 
 signupSchoolStoreApi.post('/school-stores/signup', validate(schoolStoreRegistrySchema.signup), async(ctx) => {
-  const controller = new SchoolStoreRegistryController();
+	const { schoolStoreRegistry } = ctx.apps.api.controllers;
   try {
-    const data = await controller.signup(ctx);
+    const data = await schoolStoreRegistry.signup(ctx);
 		ctx.status = 200;
 		ctx.body = data;
 	} catch(error) {
-    controller.handlerError(ctx, error);
+    schoolStoreRegistry.handlerError(ctx, error);
 	}
 });
 

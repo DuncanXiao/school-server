@@ -1,18 +1,17 @@
 import Router from 'koa-router';
 import validate from 'koa2-validation';
 import signupSchema from '../../lib/schema/signup';
-import SingupController from '../../controllers/api/signup';
 
 const signupApi = new Router();
 
 signupApi.post('/signup', validate(signupSchema), async(ctx) => {
-	const singupController = new SingupController();
+	const { signup } = ctx.apps.api.controllers;
 	try {
-		const data = await singupController.insertStudent(ctx);
+		const data = await signup.insertStudent(ctx);
 		ctx.status = 200;
 		ctx.body = data;
 	} catch(error) {
-		singupController.handlerError(ctx, error);
+		signup.handlerError(ctx, error);
 	}
 });
 

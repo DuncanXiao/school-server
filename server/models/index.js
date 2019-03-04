@@ -38,6 +38,13 @@ const operatorsAliases = {
 	$col: Op.col
 };
 
+export const transaction = {
+	READ_UNCOMMITTED: Sequelize.Transaction.ISOLATION_LEVELS.READ_UNCOMMITTED,
+	READ_COMMITTEDS: Sequelize.Transaction.ISOLATION_LEVELS.READ_COMMITTED,
+	REPEATABLE_READ: Sequelize.Transaction.ISOLATION_LEVELS.REPEATABLE_READ,
+	SERIALIZABLE: Sequelize.Transaction.ISOLATION_LEVELS.SERIALIZABLE
+};
+
 export default new Sequelize(process.env.DATABASE_NAME, 
 	process.env.DATABASE_USER, process.env.DATABASE_PASSWORD, {
 		dialect: process.env.DATABASE_DIALECT,

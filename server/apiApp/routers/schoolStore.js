@@ -1,52 +1,51 @@
 import Router from 'koa-router';
 import validate from 'koa2-validation';
 import schoolStoreSchema from '../../lib/schema/schoolStore';
-import SchoolStoreController from '../../controllers/api/schoolStore';
 
 const schoolStoreApi = new Router();
 
 schoolStoreApi.get('/school-stores/:schoolId/stores/:uuid', validate(schoolStoreSchema.item.get), async(ctx) => {
-  const controller = new SchoolStoreController();
+	const { schoolStore } = ctx.apps.api.controllers;
   try {
-    const data = await controller.getItem({uuid: ctx.params.uuid});
+    const data = await schoolStore.show({uuid: ctx.params.uuid});
 		ctx.status = 200;
 		ctx.body = data;
 	} catch(error) {
-    controller.handlerError(ctx, error);
+    schoolStore.handlerError(ctx, error);
 	}
 });
 
 schoolStoreApi.put('/school-stores/:schoolId/stores/:uuid', validate(schoolStoreSchema.item.put), async(ctx) => {
-  const controller = new SchoolStoreController();
+	const { schoolStore } = ctx.apps.api.controllers;
   try {
-    const data = await controller.putItemByUuId(ctx);
+    const data = await schoolStore.update(ctx);
 		ctx.status = 200;
 		ctx.body = data;
 	} catch(error) {
-    controller.handlerError(ctx, error);
+    schoolStore.handlerError(ctx, error);
 	}
 });
 
 schoolStoreApi.post('/school-stores/:schoolId/stores', validate(schoolStoreSchema.item.post), async(ctx) => {
-  const controller = new SchoolStoreController();
+	const { schoolStore } = ctx.apps.api.controllers;
   try {
-    const data = await controller.insertItem(ctx);
+    const data = await schoolStore.create(ctx);
 		ctx.status = 200;
 		ctx.body = data;
 	} catch(error) {
-    controller.handlerError(ctx, error);
+    schoolStore.handlerError(ctx, error);
 	}
 });
 
 
 schoolStoreApi.get('/school-stores/:schoolId/stores', validate(schoolStoreSchema.list.get), async(ctx) => {
-  const controller = new SchoolStoreController();
+  const { schoolStore } = ctx.apps.api.controllers;
   try {
-    const data = await controller.getList({schoolId: ctx.params.schoolId});
+    const data = await schoolStore.index();
 		ctx.status = 200;
 		ctx.body = data;
 	} catch(error) {
-    controller.handlerError(ctx, error);
+    schoolStore.handlerError(ctx, error);
 	}
 });
 
