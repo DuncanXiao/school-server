@@ -1,17 +1,15 @@
-import BaseController from '../baseController';
-import { Student, Registry } from '../../model/index';
+import BaseController from '../../baseController';
 
 class LoginController extends BaseController {
 
 	login = async(ctx) => {
-		const student = new Student();
-		const registry = new Registry();
+		const { student, registry } = ctx.apps.$models;
 		const {account, password} = ctx.request.body;
 		try {
-      const registryData = await registry.findOneToSql({
+      const registryData = await registry.findOne({
         where: {account, password}
       });
-      const data = await student.findOneToSql({
+      const data = await student.findOne({
         where: {registryId: registryData.id}
       });
 			return data;

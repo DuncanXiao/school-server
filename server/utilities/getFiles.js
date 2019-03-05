@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 
 export const getFilesName = (options, files=[]) => {
 	const fileNames = fs.readdirSync(options.rootPath);
@@ -32,4 +33,16 @@ export const getFilesPath = (options, paths=[]) => {
 		}
 	});
 	return paths;
+};
+
+export const getAppPath = () => {
+	const rootPath = path.resolve(__dirname, '../../server');
+	const filesPath = fs.readdirSync(rootPath);
+	const appPaths = [];
+	filesPath.map((fileName) => {
+		if (/App$/.test(fileName)) {
+			appPaths.push(`${rootPath}/${fileName}`);
+		}
+	});
+	return appPaths;
 };

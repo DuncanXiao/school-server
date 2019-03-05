@@ -1,29 +1,28 @@
 import Router from 'koa-router';
 import validate from 'koa2-validation';
 import studentSchema from '../../lib/schema/student';
-import StundentController from '../../controllers/api/student';
 
 const studentApi = new Router();
 
 studentApi.get('/student/:uuid', validate(studentSchema.get), async(ctx) => {
-	const stundentController = new StundentController();
+	const { student } = ctx.apps.api.controllers;
 	try {
-		const data = await stundentController.getItem({uuid: ctx.params.uuid});
+		const data = await student.show({uuid: ctx.params.uuid});
 		ctx.status = 200;
 		ctx.body = data;
 	} catch(error) {
-		stundentController.handlerError(ctx, error);
+		student.handlerError(ctx, error);
 	}
 });
 
 studentApi.put('/student/:uuid', validate(studentSchema.put), async(ctx) => {
-	const stundentController = new StundentController();
+	const { student } = ctx.apps.api.controllers;
 	try {
-		const data = await stundentController.putItemByUuId(ctx);
+		const data = await student.update(ctx);
 		ctx.status = 200;
 		ctx.body = data;
 	} catch(error) {
-		stundentController.handlerError(ctx, error);
+		student.handlerError(ctx, error);
 	}
 });
 

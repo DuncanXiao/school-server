@@ -1,12 +1,13 @@
 import Koa from 'koa';
-import router from './routers/index';
 import views from 'koa-views';
 import path from 'path';
 import serve from 'koa-static';
 import bodyParser from 'koa-bodyparser';
 import http from 'http';
-import jwt from 'koa-jwt';
-require('dotenvjs').string();
+import appMount from './middlware/appMount';
+import catchError from './middlware/catchError';
+import source from './middlware/source';
+import models from './middlware/models';
 
 process.on('unhandledRejection', (reason, p) => {
   // eslint-disable-next-line no-console
@@ -15,17 +16,7 @@ process.on('unhandledRejection', (reason, p) => {
 
 const app = new Koa();
 
-app.use(async (ctx, next) => {
-	try {
-		await next();
-	} catch (err) {
-		ctx.status = err.status || err.code;
-		ctx.body = {
-			success: false,
-			message: err.message,
-		};
-	}
-});
+app.use(catchError);
 
 app.use(bodyParser());
 
@@ -40,9 +31,12 @@ app.use(views(path.join(__dirname, './views'), {
 	}
 }));
 
-app.use(jwt({ secret: process.env.SECREAT }).unless({ path: [/^\/api\/login/, /^\/api\/signup/] }));
+app.use(source);
 
-app.use(router.routes()).use(router.allowedMethods());
+app.use(models);
+
+app.use(appMount(app));
+
 const server = http.createServer(app.callback());
 server.listen(3000, function(){
 	// eslint-disable-next-line no-console
