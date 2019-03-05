@@ -1,9 +1,9 @@
 import mount from 'koa-mount';
+import lodash from 'lodash';
 
 const appMount = (server) => {
   return async (ctx, next) => {
-    const { api } = ctx.apps;
-    server.use(mount(api.mount, api.app));
+    lodash.forEach(ctx.apps, (a) => server.use(mount(a.mount, a.app)));
 
     await next();
   };

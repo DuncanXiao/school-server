@@ -4,13 +4,13 @@ import BaseApp from '../baseApp';
 
 require('dotenvjs').string();
 
-class ApiApp extends BaseApp {
+class authApp extends BaseApp {
   constructor() {
     super();
 
     this.app = new Koa();
-    this.mount = '/api';
-    this.appName = 'api';
+    this.mount = '/auth';
+    this.appName = 'auth';
     this.controllers = {};
   }
 
@@ -21,4 +21,4 @@ class ApiApp extends BaseApp {
   }
 }
 
-module.exports = ApiApp;
+module.exports = authApp;

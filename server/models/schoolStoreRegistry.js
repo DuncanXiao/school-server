@@ -14,7 +14,11 @@ module.exports = function(sequelize, DataTypes) {
 			allowNull: false,
 			unique: true
 		},
-		password: {
+		passwordHash: {
+			type: DataTypes.STRING,
+			allowNull: false
+		},
+		salt: {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
