@@ -46,7 +46,7 @@ module.exports = function(sequelize, DataTypes) {
 		underscored: false,
 		freezeTableName: true
   });
-  
+
   ProductOrder.associate = models => {
     ProductOrder.belongsTo(models.studentOrder, { foreignKey: 'studentOrderId' });
   };

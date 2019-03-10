@@ -5,6 +5,7 @@ import sequelize, { transaction } from './models';
 require('dotenvjs').string();
 
 class BaseController {
+
 	setToken = (ctx, data, options) => {
     const token = signToken(data);
     let expiresTime = new Date();
@@ -20,7 +21,7 @@ class BaseController {
     const payload = verifyToken(token);
     return { token, ...payload };
   }
-  
+
   handlerError = (ctx, error) => {
     let boom = {};
     if (_.isEmpty(error.statusCode)) {

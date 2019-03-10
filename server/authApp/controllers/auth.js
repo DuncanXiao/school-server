@@ -47,7 +47,7 @@ class AuthController extends BaseController {
 				}, {transaction: t});
 				const studentResult = await student.create({
 					schoolId: schoolId,
-					uui: uuidv1(),
+					uuid: uuidv1(),
 					registryId: registryResult.dataValues.id,
 					name: name,
 					sex: sex,
@@ -93,7 +93,7 @@ class AuthController extends BaseController {
 				const storeResult = await schoolStore.create(
 					{
 						...storeRequest,
-						uui: uuidv1(),
+						uuid: uuidv1(),
 						registryId: registryResult.dataValues.id
 					}, {transaction: t});
 

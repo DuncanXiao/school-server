@@ -14,7 +14,6 @@ const inintModel = () => {
 		const model = sequelize.import(`${sequelizeModels}/${fileName}`);
 		models[fileName.replace(/.js/, '')] = model;
 	});
-
 	_.forEach(models,(model) => {
 		if (model.hasOwnProperty('associate')) {
 			model.associate(models);

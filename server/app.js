@@ -33,9 +33,9 @@ app.use(views(path.join(__dirname, './views'), {
 
 app.use(source);
 
-app.use(models);
-
 app.use(appMount(app));
+
+app.use(models);
 
 const server = http.createServer(app.callback());
 server.listen(3000, function(){
