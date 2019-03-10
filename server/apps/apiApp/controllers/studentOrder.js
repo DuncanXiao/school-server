@@ -1,7 +1,7 @@
 import BaseController from '../../baseController';
 import lodash from 'lodash';
-import createOrderNumber from '../../utilities/createOrderNumber';
-import { getCurrentDate } from '../../utilities/date';
+import createOrderNumber from '../../../utilities/createOrderNumber';
+import { getCurrentDate } from '../../../utilities/date';
 
 class StudentOrderController extends BaseController {
   constructor(){
@@ -54,7 +54,7 @@ class StudentOrderController extends BaseController {
   }
 
   update = async () => {
-    
+
   }
 }
 

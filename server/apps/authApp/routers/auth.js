@@ -1,7 +1,7 @@
 import Router from 'koa-router';
 import validate from 'koa2-validation';
-import authSchema from '../../lib/schema/auth';
-import {signToken} from '../../utilities/createJwt';
+import authSchema from '../schema/auth';
+import {signToken} from '../../../utilities/createJwt';
 
 const authRouter = new Router();
 

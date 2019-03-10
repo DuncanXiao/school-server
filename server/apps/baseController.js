@@ -1,7 +1,7 @@
 import Boom from 'boom';
-import { signToken, verifyToken } from './utilities/createJwt';
+import { signToken, verifyToken } from '../utilities/createJwt';
 import * as _ from 'lodash';
-import sequelize, { transaction } from './models';
+import sequelize, { transaction } from '../models';
 require('dotenvjs').string();
 
 class BaseController {
