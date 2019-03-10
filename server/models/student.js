@@ -91,7 +91,7 @@ module.exports = function(sequelize, DataTypes) {
 		underscored: false,
 		freezeTableName: true
   });
-  
+
   Student.associate = models => {
     Student.belongsTo(models.school, { foreignKey: 'schoolId' });
     Student.belongsTo(models.registry, { foreignKey: 'registryId' });
