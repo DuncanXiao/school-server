@@ -1,26 +1,11 @@
-import { getAppPath } from '../utilities/getFiles';
-import * as _ from 'lodash';
+// import lodash from 'lodash';
 
-const apps = {};
+const source = (apps) => {
+  return async (ctx, next) => {
+    ctx.apps = apps;
 
-const getApp = () => {
-  const apps = {};
-  const appPaths = getAppPath();
-  appPaths.map((appPath) => {
-    const App = require(appPath);
-    const app = new App();
-    app.start();
-    apps[app.appName] = app;
-  });
-  return apps;
-};
-
-getApp();
-
-const source = async (ctx, next) => {
-  _.isEmpty(apps) ? ctx.apps = getApp() : ctx.apps = apps;
-
-  await next();
+    await next();
+  };
 };
 
 export default source;

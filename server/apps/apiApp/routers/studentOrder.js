@@ -1,6 +1,6 @@
 import Router from 'koa-router';
 import validate from 'koa2-validation';
-import studentOrderSchema from '../../lib/schema/studentOrder';
+import studentOrderSchema from '../schema/studentOrder';
 
 const studentOrderApi = new Router();
 

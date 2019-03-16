@@ -18,7 +18,7 @@ class AuthController extends BaseController {
 	}
 
 	loginStudent = async(ctx) => {
-		const { student, registry } = ctx.apps.$models;
+		const { student, registry } = ctx.$models;
 		const {account, password} = ctx.request.body;
 		const registryData = await registry.findOne({
 			where: {account}
@@ -35,7 +35,7 @@ class AuthController extends BaseController {
 	}
 
 	signupStudent = async(ctx) => {
-    const { student, registry } = ctx.apps.$models;
+    const { student, registry } = ctx.$models;
 		const {account, password, phone, schoolId, name, sex, address1} = ctx.request.body;
 		const hashSalt = this.getPasswordHashSalt(password);
 		const result = await this.transaction({
