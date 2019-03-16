@@ -7,14 +7,14 @@ class SchoolStoreRegistryController extends BaseController {
   }
 
   signup = async(ctx) => {
-    const { schoolStore, SchoolStoreRegistry } = ctx.apps.$models;
+    const { schoolStore, SchoolStoreRegistry } = ctx.$models;
     const registryRequest = _.pick(ctx.request.body, ['account', 'password', 'identityCard', 'schoolId']);
     const storeRequest = _.omit(ctx.request.body, ['account', 'password', 'identityCard']);
 		try {
 			const result = await this.transaction({
 				callback: async(t) => {
 					const registryResult = await SchoolStoreRegistry.create(registryRequest, {transaction: t});
-          const studentResult = await schoolStore.create(Object.assign({}, 
+          const studentResult = await schoolStore.create(Object.assign({},
             storeRequest,
             {
               registryId: registryResult.dataValues.id
@@ -29,7 +29,7 @@ class SchoolStoreRegistryController extends BaseController {
 	}
 
 	login = async(ctx) => {
-    const { schoolStore, schoolStoreRegistry } = ctx.apps.$models;
+    const { schoolStore, schoolStoreRegistry } = ctx.$models;
 		const { account, password } = ctx.request.body;
 		try {
       const registryData = await schoolStoreRegistry.findOne({

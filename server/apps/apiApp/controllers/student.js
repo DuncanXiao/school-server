@@ -7,11 +7,11 @@ class StudentController extends BaseController {
   }
 
   show = async ctx => {
-    return await ctx.apps.$models.student.findOne({ where: {uuid: ctx.params.uuid} });
+    return await ctx.$models.student.findOne({ where: {uuid: ctx.params.uuid} });
   }
 
   update = async ctx => {
-    const { student } = ctx.apps.$models.student;
+    const { student } = ctx.$models.student;
     const { uuid } = ctx.params;
     await student.update(lodash.omit(ctx.request.body, ['uuid']), {
       where: {uuid}

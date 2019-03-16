@@ -5,7 +5,7 @@ export const getFilesName = (options, files=[]) => {
 	const fileNames = fs.readdirSync(options.rootPath);
 	fileNames.forEach((fileName) => {
 		if (!/(.js)$/.test(fileName)) {
-			getFilesName({rootPath:`${options.rootPath}/${fileName}`, 
+			getFilesName({rootPath:`${options.rootPath}/${fileName}`,
 				ignoreFilesName: options.ignoreFilesName}, files);
 		} else if (/(.js)$/.test(fileName) && options.ignoreFilesName.indexOf(fileName) == -1) {
 			files.push(fileName);
@@ -25,8 +25,8 @@ export const getFilesPath = (options, paths=[]) => {
 	filesPath.forEach((filePath) => {
 		const relativePath = `${options.relativePath}/${filePath}`;
 		if (!/(.js)$/.test(filePath)) {
-			getFilesPath({rootPath: options.rootPath, 
-				relativePath: relativePath, 
+			getFilesPath({rootPath: options.rootPath,
+				relativePath: relativePath,
 				ignoreFilesName: options.ignoreFilesName}, paths);
 		} else if (/(.js)$/.test(filePath) && options.ignoreFilesName.indexOf(filePath) == -1) {
 			paths.push(relativePath);
@@ -36,11 +36,11 @@ export const getFilesPath = (options, paths=[]) => {
 };
 
 export const getAppPath = () => {
-	const rootPath = path.resolve(__dirname, '../../server');
+	const rootPath = path.resolve(__dirname, '../apps');
 	const filesPath = fs.readdirSync(rootPath);
 	const appPaths = [];
 	filesPath.map((fileName) => {
-		if (/App$/.test(fileName)) {
+		if (/App$/.test(fileName) && !/baseApp$/.test(fileName)) {
 			appPaths.push(`${rootPath}/${fileName}`);
 		}
 	});

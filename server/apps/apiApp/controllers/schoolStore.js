@@ -7,16 +7,16 @@ class SchoolStoreController extends BaseController {
   }
 
   index = async ctx => {
-    return await ctx.apps.$models.schoolStore.findAll({ where: {schoolId: ctx.params.schoolId} });
+    return await ctx.$models.schoolStore.findAll({ where: {schoolId: ctx.params.schoolId} });
   }
 
   show = async ctx => {
-    return await ctx.apps.$models.schoolStore.findOne({ where: {uuid: ctx.params.uuid} });
+    return await ctx.$models.schoolStore.findOne({ where: {uuid: ctx.params.uuid} });
   }
 
   update = async ctx => {
     const { uuid } = ctx.params;
-    const { schoolStore } = ctx.apps.$models;
+    const { schoolStore } = ctx.$models;
     await schoolStore.update(lodash.omit(ctx.request.body, ['uuid']), {
       where: {uuid}
     });
@@ -27,7 +27,7 @@ class SchoolStoreController extends BaseController {
   }
 
   create = async ctx => {
-    return await ctx.apps.$models.schoolStore.create(ctx.request.body);
+    return await ctx.$models.schoolStore.create(ctx.request.body);
   }
 }
 

@@ -9,23 +9,23 @@ class StudentOrderController extends BaseController {
   }
 
   index = async (ctx) => {
-    await ctx.apps.$models.studentOrder.find({ where: { uuid: ctx.params.uuid } });
+    await ctx.$models.studentOrder.find({ where: { uuid: ctx.params.uuid } });
   }
 
   create = async (ctx) => {
     const { uuid } = ctx.params;
-    const { studentOrder, productOrder } = ctx.apps.$models;
-    const studentStoreData = await this.getStudentStoreData(ctx.apps.$models, uuid, ctx.request.body.storeUuid);
+    const { studentOrder, productOrder } = ctx.$models;
+    const studentStoreData = await this.getStudentStoreData(ctx.$models, uuid, ctx.request.body.storeUuid);
     const date = getCurrentDate();
     const orderDate = lodash.omit(ctx.request.body, ['products']);
     const products = lodash.pick(ctx.request.body, ['products']);
     const orderNumber = createOrderNumber(uuid, studentStoreData.schoolId);
     const result = await this.transaction({
       callback: async(t) => {
-        const order = await studentOrder.create({ 
+        const order = await studentOrder.create({
           ...orderDate, id: studentStoreData.id, storeId: studentStoreData.storeId,
            orderNumber, ...date }, {transaction: t});
-        const productsRequest = this.formateProducts(products, ctx.request.body.storeUuid, date, order.dataValues.id);  
+        const productsRequest = this.formateProducts(products, ctx.request.body.storeUuid, date, order.dataValues.id);
         const productsDate = await productOrder.bulkCreate(productsRequest);
         order.dataValues.products = productsDate;
         return order.dataValues;

@@ -7,7 +7,7 @@ class SchoolStoreProductController extends BaseController {
 
   create = async ctx => {
     let data = [];
-    const { schoolStore, schoolStoreProduct } = ctx.apps.$models;
+    const { schoolStore, schoolStoreProduct } = ctx.$models;
     const storeId = await this.getStoreId(schoolStore, ctx.params.uuid);
     ctx.request.body.map((item) => {
       data.push(Object.assign({}, item, storeId));
@@ -16,7 +16,7 @@ class SchoolStoreProductController extends BaseController {
   }
 
   index = async ctx => {
-    const { schoolStore, schoolStoreProduct } = ctx.apps.$models;
+    const { schoolStore, schoolStoreProduct } = ctx.$models;
     const storeId = await this.getStoreId(schoolStore, ctx.params.uuid);
     return await schoolStoreProduct.findAll({ where: {storeId} });
   }
